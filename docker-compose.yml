@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  whoami:
+    image: traefik/whoami
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`whoami.example.com`)
+      - traefik.http.routers.whoami.entrypoints=https
+      - traefik.http.routers.whoami.tls.certresolver=le
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik-compose_default
+    external: true
